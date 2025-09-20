@@ -1,15 +1,10 @@
 ---
-interface Event {
-    id: number;
-    title: string;
-    description: string;
-    startDate: string;
-    endDate: string;
-    organizerId: number;
-}
+import type { IEvent } from '../lib/types';
+
+
 
 interface Props {
-    events: Event[];
+    events: IEvent[];
 }
 
 const { events } = Astro.props;
