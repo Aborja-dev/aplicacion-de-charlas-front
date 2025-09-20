@@ -1,0 +1,36 @@
+---
+import type { IEvent, ITalk } from '../lib/types';
+import TalkLIst from './TalkLIst.astro';
+
+interface Props {
+    event: IEvent;
+    talks: ITalk[];
+}
+const { event, talks } = Astro.props;
+---
+
+<div class="container">
+    <h1>{event?.title}</h1>
+    <div>
+        <p>{event?.description}</p>
+        <p>{event?.startDate}</p>
+        <p>{event?.endDate}</p>
+    </div>
+    <div>
+        <h2>Charlas</h2>
+        <TalkLIst talks={talks} />
+    </div>
+</div>
+
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 80%;
+        border: 1px solid #ccc;
+        margin: 0 auto;
+    }
+</style>

@@ -1,0 +1,13 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/layout.astro";
+import { getTalkDetail } from "../../lib/gateway";
+const talk = await getTalkDetail("1")
+export const getStaticPaths = (() => {
+    return [{params: {talkId: "1"}}]
+}) satisfies GetStaticPaths;
+---
+
+<Layout>
+    <pre>{JSON.stringify(talk, null, 2)}</pre>
+</Layout>

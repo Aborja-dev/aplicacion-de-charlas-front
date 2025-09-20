@@ -1,0 +1,16 @@
+---
+import type { ITalk } from '../lib/types'
+
+interface Props {
+    talks: ITalk[]
+}
+const {talks} = Astro.props
+---
+<ul>
+    {talks.map((talk:ITalk) => (
+        <li>{talk.title}</li>
+        <p>{talk.description}</p>
+        <p>{talk.topic}</p>
+        <a href="">Ver mas</a>
+    ))}
+</ul>

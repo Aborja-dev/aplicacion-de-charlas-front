@@ -1,16 +1,46 @@
 ---
+import { api } from "../lib/gateway";
+import EventDisplay from "../components/EventsDisplay.astro";
+import Layout from "../layouts/layout.astro";
 
+interface Event {
+  id: number;
+  title: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  organizerId: number;
+}
+
+let events: Event[] = [];
+let error: string | null = null;
+let isLoading = true;
+
+try {
+  const response = await api.organizer.getMyEvents();
+  // Safely handle the response with type assertion
+  const responseData = response?.data;
+  events = Array.isArray(responseData) ? responseData : [];
+} catch (err: unknown) {
+  console.error('Failed to load events:', err);
+  error = err instanceof Error ? err.message : 'Failed to load events. Please try again later.';
+} finally {
+  isLoading = false;
+}
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <h1>Eventos</h1>
+  {isLoading ? (
+    <p>Loading events...</p>
+  ) : error ? (
+    <div style="color: red; padding: 1rem; background: #ffebee; border-radius: 4px;">
+      <p>Error: {error}</p>
+      <p>Please ensure the backend server is running at http://localhost:3000</p>
+    </div>
+  ) : events.length === 0 ? (
+    <p>No events found.</p>
+  ) : (
+    <EventDisplay events={events} />
+  )}
+</Layout>

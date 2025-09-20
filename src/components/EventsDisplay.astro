@@ -1,0 +1,28 @@
+---
+interface Event {
+    id: number;
+    title: string;
+    description: string;
+    startDate: string;
+    endDate: string;
+    organizerId: number;
+}
+
+interface Props {
+    events: Event[];
+}
+
+const { events } = Astro.props;
+---
+
+<ul>
+    {events.map((event) => (
+        <div style="border: 1px solid #ccc; padding: 10px; margin: 10px; list-style: none; display: inline-block;">
+            <li>{event.title}</li>
+            <li>{event.description}</li>
+            <li>{event.startDate}</li>
+            <li>{event.endDate}</li>
+            <a href={`event/${event.id}`}>Ver charlas</a>
+        </div>
+    ))}
+</ul>
