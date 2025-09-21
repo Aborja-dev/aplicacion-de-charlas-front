@@ -1,0 +1,10 @@
+---
+import TalkLIst from "../../components/TalkLIst.astro";
+import Layout from "../../layouts/layout.astro";
+import { getAllTalksRequest } from "../../lib/gateway";
+const talks = await getAllTalksRequest();
+---
+<Layout>
+    <a href="/admin/new-event">New Event</a>
+    <TalkLIst talks={talks} />
+</Layout>

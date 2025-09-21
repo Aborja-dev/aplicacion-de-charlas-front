@@ -1,0 +1,17 @@
+---
+import type { ITalk } from '../lib/types'
+
+interface Props {
+    talk: ITalk
+}
+const {talk} = Astro.props;
+---
+
+<h1>{talk.title}</h1>
+<p>{talk.description}</p>
+<p>{talk.duration}</p>
+<p>{talk.topic}</p>
+<p>{talk.status}</p>
+<p>{talk.candidateId}</p>
+<p>{talk.eventId}</p>
+<p>{talk.createdAt}</p>

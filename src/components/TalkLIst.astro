@@ -11,6 +11,6 @@ const {talks} = Astro.props
         <li>{talk.title}</li>
         <p>{talk.description}</p>
         <p>{talk.topic}</p>
-        <a href="">Ver mas</a>
+        <a href={`/candidate/detail/${talk.id}`}>Ver mas</a>
     ))}
 </ul>

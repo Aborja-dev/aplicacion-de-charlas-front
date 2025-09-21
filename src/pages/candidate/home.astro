@@ -1,13 +1,13 @@
 ---
 import TalkLIst from "../../components/TalkLIst.astro";
 import Layout from "../../layouts/layout.astro";
-import { api } from "../../lib/gateway";
+import {getUserTalksRequest } from "../../lib/gateway";
 import type { ITalk } from "../../lib/types";
-const {data} = await api.candidate.getMyTalks("1");
+const data = await getUserTalksRequest("1");
 const talks: ITalk[] = data
 ---
 <Layout>
     <h1>talks</h1>
-    <a href="/candidate/create">Crear propuesta</a>
+    <a href="/candidate/proposal">Crear propuesta</a>
     <TalkLIst talks={talks} />
 </Layout>

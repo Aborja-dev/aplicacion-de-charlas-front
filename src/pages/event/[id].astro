@@ -1,19 +1,20 @@
 ---
-import api, { getEventRequest } from "../../lib/gateway";
+
 import Layout from "../../layouts/layout.astro";
-import { type IEvent, type ITalk } from "../../lib/types";
 import EventDetails from "../../components/EventDetails.astro";
+import { getEventRequest, getEventsRequest } from "../../lib/gateway";
 const { id } = Astro.params;
 if (!id) throw new Error('Event ID is required');
 const event = await getEventRequest(id.toString());
 export const getStaticPaths = async () => {
-    const events = await api.organizer.getMyEvents()
-    return events.data.map((event) => ({
+    const events = await getEventsRequest()
+    return events.map((event) => ({
         params: { id: event.id.toString() },
     }))
 }
 const { talks, ..._event } = event
 ---
 <Layout>
+    <a href="/candidate/proposal">Hacer propuesta</a>
     <EventDetails event={_event} talks={talks} />
 </Layout>

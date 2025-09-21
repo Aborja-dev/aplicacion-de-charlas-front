@@ -8,6 +8,8 @@ export interface IEvent {
     startDate:   Date;
     endDate:     Date;
     organizerId: number;
+    location: string;
+    maxAttendees: number;
 }
 
 export interface ITalk {
@@ -20,6 +22,17 @@ export interface ITalk {
     candidateId: string;
     eventId:     string;
     createdAt:   Date;
+}
+export interface IMessage {
+    id:        string;
+    content:   string;
+    talkId:    string;
+    senderId:  string;
+    createdAt: Date;
+}
+
+export type ITalkDetail = ITalk & {
+    messages: IMessage[];
 }
 
 export interface EventWithTalks extends IEvent {

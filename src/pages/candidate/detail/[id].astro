@@ -1,0 +1,22 @@
+---
+import MEssageLIst from '../../../components/MEssageLIst.astro';
+import TalkDetail from '../../../components/talkDetail.astro';
+import Layout from '../../../layouts/layout.astro';
+import { getTalkDetail } from '../../../lib/gateway';
+import { getUserTalksRequest } from '../../../lib/gateway';
+
+const { id } = Astro.params;
+if (!id) throw new Error('Event ID is required');
+export const getStaticPaths = async () => {
+    const talks = await getUserTalksRequest("1")
+    return talks.map((event) => ({
+        params: { id: event.id.toString() },
+    }))
+}
+const talk = await getTalkDetail(id)
+---
+
+<Layout>
+    <TalkDetail talk={talk} />
+    <MEssageLIst messages={talk.messages} /> 
+</Layout>

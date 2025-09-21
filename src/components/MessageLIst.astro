@@ -1,0 +1,32 @@
+---
+import type { IMessage } from '../lib/types'
+interface Props {
+    messages: IMessage[]
+}
+const {messages} = Astro.props;
+---
+<ul>
+    {
+        messages.map((message) => (
+            <li>
+                <p>{message.content}</p>
+                <p>{message.createdAt}</p>
+            </li>
+        ))
+    }
+    <form id="message-form">
+        <input type="text" name="message" />
+        <button type="submit">Send</button>
+    </form>
+</ul>
+<script>
+import { sendMessageRequest } from "../lib/gateway";
+
+    document.querySelector('#message-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target as HTMLFormElement);
+        const message = formData.get('message') as string;
+        const result = await sendMessageRequest({talkId: '1', message});
+        console.log(result);
+    });
+</script>

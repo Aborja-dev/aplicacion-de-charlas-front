@@ -1,0 +1,46 @@
+<form id="create-event">
+    <label for="title">Title</label>
+    <input type="text" name="title" required />
+    <label for="description">Description</label>
+    <textarea name="description" required></textarea>
+    <label for="startDate">Start Date</label>
+    <input type="datetime-local" name="startDate" required />
+    <label for="endDate">End Date</label>
+    <input type="datetime-local" name="endDate" required />
+    <label for="location">Location</label>
+    <input type="text" name="location" required />
+    <label for="maxAttendees">Maximum Attendees</label>
+    <input type="number" name="maxAttendees" min="1" required />
+    <input type="hidden" name="organizerId" value="1" /> <!-- You'll want to set this dynamically in a real app -->
+    <button type="submit">Create Event</button>
+</form>
+<script>
+import { createEvent } from "../lib/gateway";
+import type { IEvent } from "../lib/types";
+
+document.querySelector("#create-event")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
+    // Convert form data to proper types
+    const eventData: Omit<IEvent, 'id'> = {
+        title: formData.get('title') as string,
+        description: formData.get('description') as string,
+        startDate: new Date(formData.get('startDate') as string),
+        endDate: new Date(formData.get('endDate') as string),
+        location: formData.get('location') as string,
+        maxAttendees: Number(formData.get('maxAttendees')),
+        organizerId: Number(formData.get('organizerId'))
+    };
+    
+    try {
+        await createEvent(eventData);
+        form.reset();
+        alert('Event created successfully!');
+    } catch (error) {
+        console.error('Error creating event:', error);
+        alert('Failed to create event. Please try again.');
+    }
+});
+</script>
