@@ -1,11 +1,13 @@
 ---
 import EventDisplay from "../components/EventsDisplay.astro";
+import About from "../components/landing/About.astro";
+import Hero from "../components/landing/Hero.astro";
+import Speakers from "../components/landing/Speakers.astro";
 import Layout from "../layouts/layout.astro";
 import { getEventsRequest } from "../lib/gateway";
 const events = await getEventsRequest();
 ---
 
 <Layout>
-  <h1>Eventos</h1>
-  <EventDisplay events={events} />
+  <Speakers />
 </Layout>

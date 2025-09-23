@@ -1,5 +1,6 @@
 ---
 
+import Header from "../components/Header.astro";
 import "../global.css";
 import Globe from "../icons/Globe.astro";
 ---
@@ -13,48 +14,11 @@ import Globe from "../icons/Globe.astro";
 		<title>Astro</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&display=swap">
 	</head>
-	<header
-	class="sticky top-0 z-50 w-full h-[70px] bg-sky-950/50 backdrop-blur-lg border-b border-white/10 flex items-center justify-between px-8"
-  >
-	<div class="flex items-center gap-2">
-	  <Globe size={40} color="hsl(50, 80%, 60%)" strokeWidth={1.5} />
-	  <h1 class="logo text-2xl inline-block pl-4 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] hover:drop-shadow-[0_0_12px_rgba(255,255,255,1)] transition-all duration-300 w-12">
-		Cosmic Convergence
-	  </h1>
-	</div>
-	<div>
-		<nav>
-			<ul class="flex gap-8 text-lg orbitron">
-				<li>
-				  <a href="/" class="relative px-2 py-1 text-white transition-all duration-300 hover:text-yellow-300 group">
-					<span>Home</span>
-					<span class="absolute inset-0 w-full h-full border-b-2 border-transparent group-hover:border-yellow-300 group-hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.7)] transition-all duration-300"></span>
-				  </a>
-				</li>
-				<li>
-				  <a href="/about" class="relative px-2 py-1 text-white transition-all duration-300 hover:text-yellow-300 group">
-					<span>Conferencias</span>
-					<span class="absolute inset-0 w-full h-full border-b-2 border-transparent group-hover:border-yellow-300 group-hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.7)] transition-all duration-300"></span>
-				  </a>
-				</li>
-				<li>
-				  <a href="/contact" class="relative px-2 py-1 text-white transition-all duration-300 hover:text-yellow-300 group">
-					<span>Speaker</span>
-					<span class="absolute inset-0 w-full h-full border-b-2 border-transparent group-hover:border-yellow-300 group-hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.7)] transition-all duration-300"></span>
-				  </a>
-				</li>
-				<li>
-				  <a href="/" class="relative px-2 py-1 text-white transition-all duration-300 hover:text-yellow-300 group">
-					<span>Registrarme</span>
-					<span class="absolute inset-0 w-full h-full border-b-2 border-transparent group-hover:border-yellow-300 group-hover:drop-shadow-[0_0_8px_rgba(234,179,8,0.7)] transition-all duration-300"></span>
-				  </a>
-				</li>
-			  </ul>
-		</nav>
-	</div>
-  </header>
-	<body>
-		<slot />
+	<body class="relative">
+		<main class="absolute top-0 left-0">
+			<Header />
+			<slot />
+		</main>
 	</body>
 
 </html>
