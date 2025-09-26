@@ -31,6 +31,12 @@ export interface IMessage {
     createdAt: Date;
 }
 
+export type ISession = {
+    token: string;
+    userId: number;
+    name: string;
+}
+
 export interface ISpeaker {
     id:          string;
     name:        string;

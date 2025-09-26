@@ -1,4 +1,4 @@
-import type { EventWithTalks, ITalk,IEvent, ITalkDetail } from "./types";
+import type { EventWithTalks, ITalk,IEvent, ITalkDetail, ISession } from "./types";
 const API_BASE_URL = 'http://localhost:3000/api';
 type ICreateProposal = {
   title: string;
@@ -6,13 +6,9 @@ type ICreateProposal = {
   duration: string;
   topic: string;
 }
-export const loginRequest = async (credentials: { email: string; password: string }): Promise<{
-  token: string;
-  userId: number;
-  name: string;
-}> =>
+export const loginRequest = async (credentials: { email: string; password: string }): Promise<ISession> =>
 {
-  const response = await fetch('/login', {
+  const response = await fetch(`${API_BASE_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
