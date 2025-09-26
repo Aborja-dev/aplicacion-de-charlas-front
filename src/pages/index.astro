@@ -1,13 +1,59 @@
 ---
-import EventDisplay from "../components/EventsDisplay.astro";
+import EventDisplay from "../components/landing/EventsDisplay.astro";
 import About from "../components/landing/About.astro";
 import Hero from "../components/landing/Hero.astro";
 import Speakers from "../components/landing/Speakers.astro";
+import Contact from "../components/landing/Contact.astro";
 import Layout from "../layouts/layout.astro";
-import { getEventsRequest } from "../lib/gateway";
-const events = await getEventsRequest();
+import { getAllTalksRequest, getEventsRequest } from "../lib/gateway";
+import type { ISpeaker } from "../lib/types";
+import Header from "../components/Header.astro";
+const talks = await getAllTalksRequest();
+const speakers:ISpeaker[] = [
+  {
+    id: "1",
+    name: "Speaker 1",
+    position: "Speaker 1",
+    description: "Speaker 1",
+    image: "/public/images/user.jpg",
+    socials: {
+      twitter: "https://twitter.com/speaker1",
+      linkedin: "https://linkedin.com/speaker1",
+      profile: "https://profile.com/speaker1"
+    }
+  },
+  {
+    id: "2",
+    name: "Speaker 2",
+    position: "Speaker 2",
+    description: "Speaker 2",
+    image: "/public/images/user.jpg",
+    socials: {
+      twitter: "https://twitter.com/speaker1",
+      linkedin: "https://linkedin.com/speaker1",
+      profile: "https://profile.com/speaker1"
+    }
+  },
+  {
+    id: "3",
+    name: "Speaker 3",
+    position: "Speaker 3",
+    description: "Speaker 3",
+    image: "/public/images/user.jpg",
+    socials: {
+      twitter: "https://twitter.com/speaker1",
+      linkedin: "https://linkedin.com/speaker1",
+      profile: "https://profile.com/speaker1"
+    }
+  }
+]
 ---
 
 <Layout>
-  <Speakers />
+  <Header />
+  <Hero />
+  <About />
+  <EventDisplay talks={talks} />
+  <Speakers speakers={speakers} />
+  <Contact />
 </Layout>

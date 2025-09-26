@@ -1,5 +1,6 @@
 ---
-import MEssageLIst from '../../../components/MEssageLIst.astro';
+
+import MessageLIst from '../../../components/MessageLIst.astro';
 import TalkDetail from '../../../components/talkDetail.astro';
 import Layout from '../../../layouts/layout.astro';
 import { getTalkDetail } from '../../../lib/gateway';
@@ -18,5 +19,5 @@ const talk = await getTalkDetail(id)
 
 <Layout>
     <TalkDetail talk={talk} />
-    <MEssageLIst messages={talk.messages} /> 
+    <MessageLIst messages={talk.messages} /> 
 </Layout>

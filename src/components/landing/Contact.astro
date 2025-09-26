@@ -1,0 +1,37 @@
+---
+import Form from "../Form/Form.astro";
+import RegisterForm from "../RegisterForm.astro";
+
+// Este componente de Astro contiene solo la parte visual del formulario.
+// No necesita ninguna lógica de JavaScript en el frontmatter (entre las tres guiones).
+---
+
+<div class="g-gradient-to-br from-[#0d011c] via-[#1a0b2e] to-[#2d1b3d] py-16 w-full my-12 max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 p-4">
+    <!-- Columna izquierda con el copy -->
+    <div class="w-full md:w-1/2 text-center md:text-left space-y-6">
+      <h1 class="text-4xl font-extrabold leading-tight text-yellow-300 orbitron uppercase">
+        <span class="block">Forma parte de la</span>
+        <span class="block">tripulación.</span>
+      </h1>
+      <p class="text-xl text-gray-400">
+        Únete a nuestra tripulación de exploradores, científicos y visionarios.
+        Comparte tus ideas y descubrimientos más audaces con el universo.
+      </p>
+      <p class="text-sm text-gray-500 hidden md:block">
+        El futuro de la exploración espacial comienza aquí. Inscríbete como conferencista y deja tu huella en el cosmos.
+      </p>
+    </div>
+    
+    <!-- Columna derecha con el formulario -->
+     <Form title="Registro de Conferencista" description="Únete a nuestra tripulación y comparte tu conocimiento con la galaxia.">
+         <RegisterForm />
+     </Form>
+
+  
+  <style>
+
+      .form-textarea {
+        min-height: 120px;
+      }
+
+  </style>

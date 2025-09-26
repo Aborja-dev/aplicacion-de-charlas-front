@@ -31,6 +31,19 @@ export interface IMessage {
     createdAt: Date;
 }
 
+export interface ISpeaker {
+    id:          string;
+    name:        string;
+    position:    string;
+    description: string;
+    image:       string;
+    socials: {
+        twitter: string;
+        linkedin: string;
+        profile: string;
+    }
+}   
+
 export type ITalkDetail = ITalk & {
     messages: IMessage[];
 }

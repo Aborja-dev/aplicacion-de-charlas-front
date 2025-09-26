@@ -1,0 +1,81 @@
+---
+import Field from "./Form/Field.astro";
+---
+
+<form class="space-y-6">
+    <!-- Campos principales -->
+    <Field name="name" label="Nombre completo">
+        <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-input"
+            placeholder="Ej. Alex Ryder"
+        />
+    </Field>
+    <Field name="position" label="Posición / Título">
+        <input
+            type="text"
+            id="position"
+            name="position"
+            class="form-input"
+            placeholder="Ej. Astrónomo Senior en SpaceX"
+        />
+    </Field>
+    <Field name="image" label="URL de la Imagen de Perfil">
+        <input
+            type="url"
+            id="image"
+            name="image"
+            class="form-input"
+            placeholder="https://ejemplo.com/tu-imagen.jpg"
+        />
+    </Field>
+    <Field name="description" label="Descripción biográfica">
+        <textarea
+            id="description"
+            name="description"
+            class="form-input form-textarea"
+            placeholder="Describe tu experiencia y tu pasión por el espacio."
+        ></textarea>
+    </Field>
+
+    <!-- Botón de envío -->
+    <button
+        type="submit"
+        class="w-full py-3 mt-8 font-bold text-lg rounded-lg text-black orbitron bg-yellow-400 hover:bg-yellow-300 transition-colors duration-200"
+    >
+        Enviar Solicitud
+    </button>
+    <div class="w-full text-center mt-4">
+        <a
+            href="/login"
+            class="inline-block text-white/40 hover:text-yellow-300 transition-colors duration-200"
+        >
+            ¿Ya tienes una cuenta? Inicia sesión
+        </a>
+    </div>
+</form>
+
+<style>
+    .form-input {
+        background-color: #111827;
+        color: #d1d5db;
+        border: 1px solid #374151;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        width: 100%;
+        outline: none;
+        transition: all 0.2s;
+    }
+    .form-input:focus {
+        border-color: #fbbf24;
+        box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.5);
+    }
+    .form-label {
+        font-weight: 500;
+        color: #9ca3af;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+</style>
