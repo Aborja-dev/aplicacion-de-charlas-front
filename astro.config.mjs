@@ -7,6 +7,7 @@ export default defineConfig({
     server:{
         port: 4320,
     },
+    output: "server",
     vite:{
         plugins:[
             tailwindcss()

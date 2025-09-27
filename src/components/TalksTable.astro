@@ -1,0 +1,196 @@
+---
+import type { ITalk } from '../lib/types';
+
+interface Props {
+  talks: ITalk[];
+}
+
+interface Talk {
+  id: string;
+  title: string;
+  speaker: string;
+  date: string;
+  time: string;
+  status: 'próximamente' | 'en_curso' | 'finalizada';
+  room: string;
+}
+
+const talks: Talk[] = [
+  {
+    id: '1',
+    title: 'El Futuro de la Web',
+    speaker: 'Ana Martínez',
+    date: '2023-11-15',
+    time: '14:00 - 15:30',
+    status: 'próximamente',
+    room: 'Sala A'
+  },
+  {
+    id: '2',
+    title: 'Inteligencia Artificial Avanzada',
+    speaker: 'Carlos López',
+    date: '2023-11-15',
+    time: '16:00 - 17:30',
+    status: 'en_curso',
+    room: 'Sala B'
+  },
+  {
+    id: '3',
+    title: 'Blockchain en 2024',
+    speaker: 'María González',
+    date: '2023-11-16',
+    time: '10:00 - 11:30',
+    status: 'finalizada',
+    room: 'Sala C'
+  },
+  {
+    id: '4',
+    title: 'Diseño UX/UI Moderno',
+    speaker: 'Juan Pérez',
+    date: '2023-11-16',
+    time: '12:00 - 13:30',
+    status: 'próximamente',
+    room: 'Sala A'
+  },
+  {
+    id: '5',
+    title: 'Seguridad en la Nube',
+    speaker: 'Laura Sánchez',
+    date: '2023-11-17',
+    time: '15:00 - 16:30',
+    status: 'próximamente',
+    room: 'Sala B'
+  }
+];
+
+const getStatusColor = (status: Talk['status']) => {
+  switch (status) {
+    case 'en_curso':
+      return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/50';
+    case 'finalizada':
+      return 'bg-gray-600/20 text-gray-400 border-gray-600/50';
+    case 'próximamente':
+    default:
+      return 'bg-green-500/20 text-green-400 border-green-500/50';
+  }
+};
+---
+
+<div class="overflow-x-auto rounded-lg border border-white/10 bg-sky-950/30 backdrop-blur-lg shadow-lg">
+  <table class="min-w-full divide-y divide-white/10">
+    <thead class="bg-sky-900/30">
+      <tr>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-yellow-300 uppercase tracking-wider">
+          Título
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-yellow-300 uppercase tracking-wider">
+          Ponente
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-yellow-300 uppercase tracking-wider">
+          Fecha y Hora
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-yellow-300 uppercase tracking-wider">
+          Sala
+        </th>
+        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-yellow-300 uppercase tracking-wider">
+          Estado
+        </th>
+        <th scope="col" class="relative px-6 py-3">
+          <span class="sr-only">Acciones</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="bg-sky-950/20 divide-y divide-white/5">
+      {talks.map((talk) => (
+        <tr 
+          class="hover:bg-sky-900/20 transition-colors duration-200 group"
+        >
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm font-medium text-white group-hover:text-yellow-300 transition-colors">
+              {talk.title}
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-300">{talk.speaker}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-300">
+              <div>{new Date(talk.date).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}</div>
+              <div class="text-xs text-gray-400">{talk.time}</div>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-sky-900/30 text-sky-300 border border-sky-700/50">
+              {talk.room}
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class={`px-2.5 py-1 text-xs font-medium rounded-full border ${getStatusColor(talk.status)}`}>
+              {talk.status.charAt(0).toUpperCase() + talk.status.slice(1).replace('_', ' ')}
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+            <button class="text-yellow-400 hover:text-yellow-300 transition-colors mr-4">
+              Ver más
+            </button>
+            <button 
+              class={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                talk.status === 'próximamente' 
+                  ? 'bg-yellow-500/20 text-yellow-400 hover:bg-yellow-500/30 border border-yellow-500/50' 
+                  : 'bg-gray-700/50 text-gray-400 cursor-not-allowed border border-gray-600/50'
+              }`}
+              disabled={talk.status !== 'próximamente'}
+            >
+              Inscribirse
+            </button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  th, td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  /* Efecto de brillo al pasar el ratón */
+  tr {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  tr::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent
+    );
+    transition: 0.5s;
+  }
+  
+  tr:hover::after {
+    left: 100%;
+  }
+</style>
