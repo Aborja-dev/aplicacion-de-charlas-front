@@ -1,0 +1,137 @@
+---
+import Field from "./Field.astro";
+import Form from "./Form.astro";
+
+// src/components/Form/CreateTalkForm.astro
+---
+
+<Form title="Crear Nueva Charla" description="Complete el formulario para programar una nueva charla">
+  <Field name="title" label="Título">
+    <input
+      type="text"
+      id="title"
+      name="title"
+      class="form-input"
+      placeholder="Título de la charla"
+      required
+    />
+  </Field>
+
+  <Field name="description" label="Descripción">
+    <textarea
+      id="description"
+      name="description"
+      class="form-input min-h-[100px]"
+      placeholder="Descripción detallada de la charla"
+      required
+    ></textarea>
+  </Field>
+
+  <Field name="duration" label="Duración (minutos)">
+    <input
+      type="number"
+      id="duration"
+      name="duration"
+      class="form-input"
+      placeholder="Ej: 60"
+      min="1"
+      required
+    />
+  </Field>
+
+  <Field name="topic" label="Tema">
+    <input
+      type="text"
+      id="topic"
+      name="topic"
+      class="form-input"
+      placeholder="Tema principal de la charla"
+      required
+    />
+  </Field>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <Field name="date" label="Fecha">
+      <input
+        type="date"
+        id="date"
+        name="date"
+        class="form-input"
+        required
+      />
+    </Field>
+
+    <Field name="time" label="Hora">
+      <input
+        type="time"
+        id="time"
+        name="time"
+        class="form-input"
+        required
+      />
+    </Field>
+  </div>
+
+  <Field name="room" label="Sala">
+    <select
+      id="room"
+      name="room"
+      class="form-input"
+      required
+    >
+      <option value="">Seleccione una sala</option>
+      <option value="Sala A">Sala A</option>
+      <option value="Sala B">Sala B</option>
+      <option value="Sala C">Sala C</option>
+    </select>
+  </Field>
+
+  <button 
+    type="submit" 
+    class="w-full bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600 transition-all duration-300 orbitron"
+  >
+    Programar Charla
+  </button>
+</Form>
+<style>
+    .form-input {
+        background-color: #111827;
+        color: #d1d5db;
+        border: 1px solid #374151;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        width: 100%;
+        outline: none;
+        transition: all 0.2s;
+    }
+    .form-input:focus {
+        border-color: #fbbf24;
+        box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.5);
+    }
+    .form-label {
+        font-weight: 500;
+        color: #9ca3af;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+</style>
+<script>
+import { ForTalkCreateRequestSchema } from "../../domain/api";
+import { createProposal } from "../../lib/gateway";
+
+    const form = document.querySelector("form");
+    if (!form) throw new Error("Form not found");
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+        const formData = ForTalkCreateRequestSchema.parse(data);
+        try {
+            createProposal("1", formData).then((response) => {
+                console.log("Talk created");
+                window.location.href = "/candidate/home";
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    });
+</script>

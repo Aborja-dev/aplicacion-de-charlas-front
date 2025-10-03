@@ -10,7 +10,7 @@ const setCookie = (name: string, value: string, days: number) => {
     document.cookie = `${name}=${encodeURIComponent(value)};${expires};path=/;SameSite=Strict`;
 };
 
-const getCookie = (name: string): string | null => {
+const getCookie = (name: string): string | null  => {
     const nameEQ = name + '=';
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
@@ -19,6 +19,11 @@ const getCookie = (name: string): string | null => {
         if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
     }
     return null;
+};
+
+export const getSession = (): ISession | null => {
+    const session = getCookie(SESSION_COOKIE);
+    return session ? JSON.parse(session) : null;
 };
 
 export const saveSession = (user: ISession) => {

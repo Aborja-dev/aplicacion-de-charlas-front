@@ -1,21 +1,22 @@
 ---
 import PrivateHeader from "../../components/PrivateHeader.astro";
 import TalksTable from "../../components/TalksTable.astro"
+import type { ForTalkOutput } from "../../domain/api";
 import Layout from "../../layouts/layout.astro";
 import {getUserTalksRequest } from "../../lib/gateway";
 import type { ITalk } from "../../lib/types";
 const sesion = Astro.cookies.get("user_session");
 const sesionData = JSON.parse(sesion?.value || "{}");
-console.log(sesionData);
+console.log("sesionData", sesionData);
 if (!sesionData) {
     return Astro.redirect("/");
 }
-const userID = sesionData.userId.toString();
-const data = await getUserTalksRequest(userID);
-const talks: ITalk[] = data
-console.log(talks);
+const data = await getUserTalksRequest(sesionData.token);
+const talks: ForTalkOutput[] = data
 ---
 <Layout>
     <PrivateHeader />
-    <TalksTable talks={talks} />
+    <div class="mx-auto w-4/5">
+        <TalksTable talks={talks} />
+    </div>
 </Layout>

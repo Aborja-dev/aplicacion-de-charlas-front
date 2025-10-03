@@ -1,12 +1,19 @@
 ---
-import CreateProposalForm from "../../../components/CreateProposalForm.astro";
+
+import CreateTalkForm from "../../../components/Form/CreateTalkForm.astro";
+import PrivateHeader from "../../../components/PrivateHeader.astro";
 import Layout from "../../../layouts/layout.astro";
 ---
 
 <Layout>
-    <h1>Crear propuesta de charla</h1>
-    <CreateProposalForm />
+    <PrivateHeader />
+    <section class="w-full h-screen flex items-center justify-center ">
+        <div class="w-4/5 mx-auto flex items-center gap-4 flex-col justify-center">
+            <CreateTalkForm client:load />
+        </div>
+    </section>
 </Layout>
+
 
 
 
